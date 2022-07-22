@@ -1,0 +1,62 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "This is server of project Test Intern",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_PATH=./src nodemon --exec ts-node src/server.ts",
+    "build": "tsc --project ./"
+  },
+  "keywords": [
+    "Server",
+    "Telio",
+    "TypeScript",
+    "NodeJs",
+    "Express",
+    "MongoDB"
+  ],
+  "author": "Minh, Hoang, Phuc",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/dompurify": "^2.3.3",
+    "@types/node": "^17.0.21",
+    "body-parser": "^1.19.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dompurify": "^2.3.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-sanitizer": "^1.0.6",
+    "express-winston": "^4.2.0",
+    "express-xss-sanitizer": "^1.1.1",
+    "google-auth-library": "^7.14.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.4",
+    "nodemon": "^2.0.15",
+    "sanitizer": "^0.1.3",
+    "swagger-ui-express": "^4.3.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3",
+    "winston": "^3.6.0",
+    "xss": "^1.0.11",
+    "xss-req-sanitizer": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/swagger-jsdoc": "^6.0.1",
+    "@types/swagger-ui-express": "^4.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1"
+  }
+}

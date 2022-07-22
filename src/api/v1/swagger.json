@@ -1,0 +1,1043 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Customer API",
+        "description": "Customer API Information, some of the APIs are protected by middleware, you are need to provide a token to send the request.",
+        "contact": {
+            "name": "nc-minh"
+        }
+    },
+    "host": "localhost:1234",
+    "tags": [{
+            "name": "Login",
+            "description": "API for Login in the system"
+        },
+        {
+            "name": "Users",
+            "description": "API for Users in the system"
+        },
+        {
+            "name": "Topics",
+            "description": "API for Topics in the system"
+        },
+        {
+            "name": "Questions",
+            "description": "API for Questions in the system"
+        },
+        {
+            "name": "Answers",
+            "description": "API for Answers in the system"
+        },
+        {
+            "name": "Exams",
+            "description": "API for Exams in the system"
+        },
+        {
+            "name": "UserAnswers",
+            "description": "API for UserAnswers in the system"
+        }
+    ],
+    "schemes": ["http", "https"],
+    "consumes": ["application/json", "application/bjson", "application/xml"],
+    "produces": ["application/json", "application/bjson", "application/xml"],
+    "paths": {
+        "/v1/login": {
+            "post": {
+                "tags": ["Login"],
+                "summary": "Login into system",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Token that we want to login",
+                    "schema": {
+                        "properties": {
+                            "tokenGoogle": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/v1/users": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get all users in system",
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid login!"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Users"],
+                "summary": "Create a new user in system",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "User that we want to create",
+                    "schema": {
+                        "properties": {
+                            "email": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/v1/users/{id}": {
+            "get": {
+                "summary": "Get a user with given ID",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "UserID to get"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete user with given ID",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "UserID to delete"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update user with given ID",
+                "parameters": [{
+                        "in": "body",
+                        "name": "body",
+                        "description": "User with new values of properties",
+                        "schema": {
+                            "properties": {
+                                "role": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "UserID to edit"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid role! You can only set (ADMIN) || (USER)",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/topics": {
+            "get": {
+                "tags": ["Topics"],
+                "summary": "Get all topics in system",
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/Topics"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid login!"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Topics"],
+                "summary": "Create a new topics in system",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Topics that we want to create",
+                    "schema": {
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/v1/topics/{id}": {
+            "delete": {
+                "summary": "Delete topic with given ID",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "TopicID to delete"
+                }],
+                "tags": [
+                    "Topics"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update topic with given ID",
+                "parameters": [{
+                        "in": "body",
+                        "name": "body",
+                        "description": "Topic with new values of properties",
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "TopicID to edit"
+                    }
+                ],
+                "tags": [
+                    "Topics"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid role! You can only set (ADMIN) || (USER)",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/questions": {
+            "get": {
+                "tags": ["Questions"],
+                "summary": "Get all questions in system",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Question that we want to get in system by topic",
+                    "schema": {
+                        "properties": {
+                            "topic": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/Questions"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid login!"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Questions"],
+                "summary": "Create a new question in system",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Question that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Question"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/v1/questions/{id}": {
+            "delete": {
+                "summary": "Delete question with given ID",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "QuestionID to delete"
+                }],
+                "tags": [
+                    "Questions"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update question with given ID",
+                "parameters": [{
+                        "in": "body",
+                        "name": "body",
+                        "description": "Question with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Question"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "TopicID to edit"
+                    }
+                ],
+                "tags": [
+                    "Questions"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid role! You can only set (ADMIN) || (USER)",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/answers": {
+            "get": {
+                "tags": ["Answers"],
+                "summary": "Get all answers in system",
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/Answers"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid login!"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Answers"],
+                "summary": "Create a new answer in system",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Answer that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Answer"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/v1/answers/{id}": {
+            "delete": {
+                "summary": "Delete answer with given ID",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "AnswerID to delete"
+                }],
+                "tags": [
+                    "Answers"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update answer with given ID",
+                "parameters": [{
+                        "in": "body",
+                        "name": "body",
+                        "description": "Answer with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Answer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "AnswerID to edit"
+                    }
+                ],
+                "tags": [
+                    "Answers"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            }
+        },
+        "/v1/exams": {
+            "get": {
+                "tags": ["Exams"],
+                "summary": "Get all exams in system",
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/Exams"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid login!"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Exams"],
+                "summary": "Create a new exam in system",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Exam that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Exam"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/v1/exams/{id}": {
+            "get": {
+                "tags": ["Exams"],
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "ExamID to getOne"
+                }],
+                "summary": "Get all exams in system",
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/Exams"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid login!"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete exam with given ID",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "ExamID to delete"
+                }],
+                "tags": [
+                    "Exams"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update exam with given ID",
+                "parameters": [{
+                        "in": "body",
+                        "name": "body",
+                        "description": "Exam with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Exam"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "ExamID to edit"
+                    }
+                ],
+                "tags": [
+                    "Exams"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            }
+        },
+        "/v1/user-answers": {
+            "get": {
+                "tags": ["UserAnswers"],
+                "summary": "Get all userAnswers in system",
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/UserAnswers"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid login!"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["UserAnswers"],
+                "summary": "Create a new userAnswer in system",
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "UserAnswer that we want to create",
+                    "schema": {
+                        "properties": {
+                            "exam": {
+                                "type": "string"
+                            },
+                            "question": {
+                                "type": "string"
+                            },
+                            "answer": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed. Bad post data."
+                    }
+                }
+            }
+        },
+        "/v1/user-answers/{id}": {
+            "get": {
+                "tags": ["UserAnswers"],
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "UserAnswerID to get"
+                }],
+                "summary": "Get all userAnswers in system",
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "$ref": "#/definitions/UserAnswers"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid login!"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete userAnswer with given ID",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "UserAnswerID to delete"
+                }],
+                "tags": [
+                    "UserAnswers"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully",
+                        "schema": {
+                            "$ref": "#/definitions/response"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            },
+            "put": {
+                "summary": "Update userAnswer with given ID",
+                "parameters": [{
+                        "in": "body",
+                        "name": "body",
+                        "description": "UserAnswer with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/UserAnswer"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "description": "UserAnswerID to edit"
+                    }
+                ],
+                "tags": [
+                    "UserAnswers"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully!",
+                        "schema": {
+                            "properties": {
+                                "exam": {
+                                    "type": "string"
+                                },
+                                "question": {
+                                    "type": "string"
+                                },
+                                "answer": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. User not found."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "response": {
+            "properties": {
+                "data": {
+                    "type": "object"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "boolean"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "Users": {
+            "type": "object",
+            "properties": {
+                "users": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/User"
+                    }
+                }
+            }
+        },
+        "Topic": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "Topics": {
+            "type": "object",
+            "properties": {
+                "topics": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Topic"
+                    }
+                }
+            }
+        },
+        "Question": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "question": {
+                    "type": "string"
+                },
+                "topic": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "boolean"
+                },
+                "answers": {
+                    "type": "object"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "level": {
+                    "type": "number"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "Questions": {
+            "type": "object",
+            "properties": {
+                "questions": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Question"
+                    }
+                }
+            }
+        },
+        "Answer": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "boolean"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "Answers": {
+            "type": "object",
+            "properties": {
+                "answers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Answer"
+                    }
+                }
+            }
+        },
+        "Exam": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "questions": {
+                    "type": "object"
+                },
+                "score": {
+                    "type": "number"
+                },
+                "duration": {
+                    "type": "number"
+                },
+                "startAt": {
+                    "type": "string"
+                },
+                "endAt": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "Exams": {
+            "type": "object",
+            "properties": {
+                "exams": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Exam"
+                    }
+                }
+            }
+        },
+        "UserAnswer": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "exam": {
+                    "type": "string"
+                },
+                "question": {
+                    "type": "string"
+                },
+                "answer": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserAnswers": {
+            "type": "object",
+            "properties": {
+                "useranswers": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/UserAnswer"
+                    }
+                }
+            }
+        }
+    }
+}
